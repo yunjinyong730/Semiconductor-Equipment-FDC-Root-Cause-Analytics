@@ -53,6 +53,6 @@ def test_rca_has_multi_evidence_columns():
         loading,
         random_state=11,
     )
-    assert {"evidence_count", "evidence_agreement", "evidence_level"}.issubset(model.ranking.columns)
+    assert {"evidence_count", "evidence_ratio"}.issubset(model.ranking.columns)
     assert model.ranking["evidence_count"].between(0, 6).all()
-    assert model.ranking["evidence_agreement"].between(0, 1).all()
+    assert model.ranking["evidence_ratio"].between(0, 1).all()
