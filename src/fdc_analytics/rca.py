@@ -110,6 +110,21 @@ def fit_rca_model(
         ranking[f"{col}_norm"] = _minmax(ranking[col])
         score = score + weights[col] * ranking[f"{col}_norm"]
     ranking["rca_score"] = score
-    ranking = ranking.sort_values("rca_score", ascending=False).reset_index(drop=True)
+
+    # 한 개의 importance 결과만으로 RCA 후보를 정하지 않고,
+    # 서로 다른 분석 근거가 같은 signal을 반복해서 지목하는지도 같이 본다.
+    normalized_columns = [f"{col}_norm" for col in components]
+    ranking["evidence_count"] = (ranking[normalized_columns] >= 0.5).sum(axis=1).astype(int)
+    ranking["evidence_agreement"] = ranking["evidence_count"] / len(normalized_columns)
+    ranking["evidence_level"] = np.select(
+        [ranking["evidence_count"] >= 4, ranking["evidence_count"] >= 3],
+        ["strong", "moderate"],
+        default="limited",
+    )
+
+    ranking = ranking.sort_values(
+        ["rca_score", "evidence_count"],
+        ascending=[False, False],
+    ).reset_index(drop=True)
     ranking["rank"] = np.arange(1, len(ranking) + 1)
     return RCAModel(clf, ranking, metrics)
