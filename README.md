@@ -1,5 +1,3 @@
-<img width="1787" height="991" alt="스크린샷 2026-10-07 오후 4 32 09" src="https://github.com/user-attachments/assets/fc60e8ba-015a-4ec9-ba0f-66e37f6026d6" />
-<img width="1773" height="981" alt="스크린샷 2026-10-07 오후 4 32 19" src="https://github.com/user-attachments/assets/2727ee16-6b8f-41b6-bc49-c9434e2c4993" />
 # Semiconductor Equipment FDC & Root Cause Analytics
 
 UCI SECOM 반도체 공정 데이터를 이용해 정상 상태를 만들고, 공정 신호가 정상 범위를 벗어나는 시점을 찾은 뒤 Fail과 관련된 signal을 좁혀가는 프로젝트입니다.
