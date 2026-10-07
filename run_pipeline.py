@@ -8,7 +8,7 @@ from src.fdc_analytics.pipeline import run_pipeline
 
 
 def main() -> None:
-    parser = argparse.ArgumentParser(description="Run SECOM FDC, drift, yield-risk and RCA analytics.")
+    parser = argparse.ArgumentParser(description="SECOM FDC, Drift, RCA 분석 실행")
     parser.add_argument("--data-dir", default="data/raw")
     parser.add_argument("--output-dir", default="outputs")
     parser.add_argument("--drift-window", type=int, default=30)
