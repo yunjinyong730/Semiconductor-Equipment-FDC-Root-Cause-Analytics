@@ -3,9 +3,9 @@
   "raw_signals": 590,
   "selected_signals": 321,
   "pca_components": 155,
-  "pca_explained_variance": 0.9502715815619112,
+  "pca_explained_variance": 0.9502715815619113,
   "t2_threshold": 621.897377342663,
-  "q_threshold": 37.2922332972877,
+  "q_threshold": 37.29223329728778,
   "fdc_alarm_rate": 0.2801531589023612,
   "fail_rate": 0.06636885768985322,
   "validation_classifier": {
@@ -22,7 +22,5 @@
     "train": 940,
     "validation": 313,
     "test": 314
-  },
-  "interpretation": "RCA results are suspect-signal priorities, not confirmed physical causes because SECOM features are anonymized.",
-  "pm_scenario": "Synthetic workflow validation only; SECOM contains no PM event labels."
+  }
 }
