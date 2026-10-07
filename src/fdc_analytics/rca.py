@@ -17,11 +17,12 @@ class RCAModel:
     metrics: dict[str, float]
 
 
-def _minmax(s: pd.Series) -> pd.Series:
-    lo, hi = float(s.min()), float(s.max())
+def _minmax(series: pd.Series) -> pd.Series:
+    lo = float(series.min())
+    hi = float(series.max())
     if hi - lo < 1e-12:
-        return pd.Series(np.zeros(len(s)), index=s.index)
-    return (s - lo) / (hi - lo)
+        return pd.Series(np.zeros(len(series)), index=series.index)
+    return (series - lo) / (hi - lo)
 
 
 def fit_rca_model(
@@ -33,63 +34,68 @@ def fit_rca_model(
     pca_loading: pd.DataFrame,
     random_state: int = 42,
 ) -> RCAModel:
-    yb_train = (y_train.to_numpy() == 1).astype(int)
-    yb_eval = (y_eval.to_numpy() == 1).astype(int)
+    y_train_bin = (y_train.to_numpy() == 1).astype(int)
+    y_eval_bin = (y_eval.to_numpy() == 1).astype(int)
 
-    clf = LogisticRegression(
+    classifier = LogisticRegression(
         max_iter=5000,
         class_weight="balanced",
         solver="liblinear",
         random_state=random_state,
     )
-    clf.fit(X_train, yb_train)
-    prob = clf.predict_proba(X_eval)[:, 1]
-    pred = (prob >= 0.5).astype(int)
+    classifier.fit(X_train, y_train_bin)
+
+    probability = classifier.predict_proba(X_eval)[:, 1]
+    prediction = (probability >= 0.5).astype(int)
     metrics = {
-        "balanced_accuracy": float(balanced_accuracy_score(yb_eval, pred)),
-        "average_precision": float(average_precision_score(yb_eval, prob)),
-        "roc_auc": float(roc_auc_score(yb_eval, prob)) if len(np.unique(yb_eval)) == 2 else float("nan"),
+        "balanced_accuracy": float(balanced_accuracy_score(y_eval_bin, prediction)),
+        "average_precision": float(average_precision_score(y_eval_bin, probability)),
+        "roc_auc": float(roc_auc_score(y_eval_bin, probability))
+        if len(np.unique(y_eval_bin)) == 2
+        else float("nan"),
     }
 
-    mi = mutual_info_classif(X_train, yb_train, random_state=random_state)
-    coef = np.abs(clf.coef_[0])
+    mutual_info = mutual_info_classif(X_train, y_train_bin, random_state=random_state)
+    coefficient = np.abs(classifier.coef_[0])
 
-    train_df = X_train.copy()
-    pass_mean = train_df.loc[yb_train == 0].mean()
-    fail_mean = train_df.loc[yb_train == 1].mean()
-    pooled_std = train_df.std(ddof=0).replace(0, 1.0)
-    effect = ((fail_mean - pass_mean) / pooled_std).abs()
+    pass_mean = X_train.loc[y_train_bin == 0].mean()
+    fail_mean = X_train.loc[y_train_bin == 1].mean()
+    pooled_std = X_train.std(ddof=0).replace(0, 1.0)
+    effect_size = ((fail_mean - pass_mean) / pooled_std).abs()
 
     try:
-        perm = permutation_importance(
-            clf,
+        permutation = permutation_importance(
+            classifier,
             X_eval,
-            yb_eval,
+            y_eval_bin,
             scoring="average_precision",
             n_repeats=10,
             random_state=random_state,
             n_jobs=-1,
         ).importances_mean
-        perm = np.maximum(perm, 0.0)
+        permutation = np.maximum(permutation, 0.0)
     except ValueError:
-        perm = np.zeros(X_train.shape[1])
+        permutation = np.zeros(X_train.shape[1])
 
-    fail_eval_mask = yb_eval == 1
-    if fail_eval_mask.any():
-        residual = pca_residual_eval.loc[fail_eval_mask].mean()
+    fail_mask = y_eval_bin == 1
+    if fail_mask.any():
+        residual = pca_residual_eval.loc[fail_mask].mean()
     else:
         residual = pca_residual_eval.mean()
 
-    ranking = pd.DataFrame({
-        "signal": X_train.columns,
-        "effect_size": effect.reindex(X_train.columns).to_numpy(),
-        "mutual_information": mi,
-        "logistic_abs_coef": coef,
-        "permutation_importance": perm,
-        "fail_residual_contribution": residual.reindex(X_train.columns).fillna(0.0).to_numpy(),
-    })
+    ranking = pd.DataFrame(
+        {
+            "signal": X_train.columns,
+            "effect_size": effect_size.reindex(X_train.columns).to_numpy(),
+            "mutual_information": mutual_info,
+            "logistic_abs_coef": coefficient,
+            "permutation_importance": permutation,
+            "fail_residual_contribution": residual.reindex(X_train.columns).fillna(0.0).to_numpy(),
+        }
+    )
     ranking = ranking.merge(pca_loading, on="signal", how="left").fillna(0.0)
-    components = [
+
+    evidence_columns = [
         "effect_size",
         "mutual_information",
         "logistic_abs_coef",
@@ -97,34 +103,21 @@ def fit_rca_model(
         "fail_residual_contribution",
         "pca_loading_importance",
     ]
-    weights = {
-        "effect_size": 0.20,
-        "mutual_information": 0.15,
-        "logistic_abs_coef": 0.20,
-        "permutation_importance": 0.15,
-        "fail_residual_contribution": 0.20,
-        "pca_loading_importance": 0.10,
-    }
-    score = 0.0
-    for col in components:
-        ranking[f"{col}_norm"] = _minmax(ranking[col])
-        score = score + weights[col] * ranking[f"{col}_norm"]
-    ranking["rca_score"] = score
 
-    # 한 개의 importance 결과만으로 RCA 후보를 정하지 않고,
-    # 서로 다른 분석 근거가 같은 signal을 반복해서 지목하는지도 같이 본다.
-    normalized_columns = [f"{col}_norm" for col in components]
-    ranking["evidence_count"] = (ranking[normalized_columns] >= 0.5).sum(axis=1).astype(int)
-    ranking["evidence_agreement"] = ranking["evidence_count"] / len(normalized_columns)
-    ranking["evidence_level"] = np.select(
-        [ranking["evidence_count"] >= 4, ranking["evidence_count"] >= 3],
-        ["strong", "moderate"],
-        default="limited",
-    )
+    normalized = []
+    for column in evidence_columns:
+        norm_column = f"{column}_norm"
+        ranking[norm_column] = _minmax(ranking[column])
+        normalized.append(norm_column)
+
+    ranking["rca_score"] = ranking[normalized].mean(axis=1)
+    ranking["evidence_count"] = (ranking[normalized] >= 0.5).sum(axis=1).astype(int)
+    ranking["evidence_ratio"] = ranking["evidence_count"] / len(normalized)
 
     ranking = ranking.sort_values(
         ["rca_score", "evidence_count"],
         ascending=[False, False],
     ).reset_index(drop=True)
     ranking["rank"] = np.arange(1, len(ranking) + 1)
-    return RCAModel(clf, ranking, metrics)
+
+    return RCAModel(classifier, ranking, metrics)
