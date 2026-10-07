@@ -1,0 +1,142 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1040" height="650" viewBox="0 0 1040 650">
+<rect width="100%" height="100%" fill="white"/>
+<style>text{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans KR","Malgun Gothic",sans-serif;fill:#1f2328}.title{font-size:24px;font-weight:700}.label{font-size:15px}.cell{font-size:13px;font-weight:600}</style>
+<text x="520" y="42" text-anchor="middle" class="title">RCA 근거 교차검증</text>
+<text x="520" y="70" text-anchor="middle" class="label">같은 signal을 여러 분석이 같이 지목하는지 확인</text>
+<text x="215" y="82" text-anchor="middle" class="label">Effect size</text>
+<text x="345" y="82" text-anchor="middle" class="label">MI</text>
+<text x="475" y="82" text-anchor="middle" class="label">Logit coef</text>
+<text x="605" y="82" text-anchor="middle" class="label">Permutation</text>
+<text x="735" y="82" text-anchor="middle" class="label">PCA residual</text>
+<text x="865" y="82" text-anchor="middle" class="label">PCA loading</text>
+<text x="132" y="128" text-anchor="end" class="label">signal_059</text>
+<rect x="150" y="100" width="128" height="44" rx="4" fill="#205493"/>
+<text x="214" y="128" text-anchor="middle" class="cell" style="fill:#ffffff">1.00</text>
+<rect x="280" y="100" width="128" height="44" rx="4" fill="#95aecc"/>
+<text x="344" y="128" text-anchor="middle" class="cell" style="fill:#1f2328">0.45</text>
+<rect x="410" y="100" width="128" height="44" rx="4" fill="#205493"/>
+<text x="474" y="128" text-anchor="middle" class="cell" style="fill:#ffffff">1.00</text>
+<rect x="540" y="100" width="128" height="44" rx="4" fill="#bacade"/>
+<text x="604" y="128" text-anchor="middle" class="cell" style="fill:#1f2328">0.28</text>
+<rect x="670" y="100" width="128" height="44" rx="4" fill="#e3eaf3"/>
+<text x="734" y="128" text-anchor="middle" class="cell" style="fill:#1f2328">0.08</text>
+<rect x="800" y="100" width="128" height="44" rx="4" fill="#577eae"/>
+<text x="864" y="128" text-anchor="middle" class="cell" style="fill:#ffffff">0.74</text>
+<text x="132" y="174" text-anchor="end" class="label">signal_122</text>
+<rect x="150" y="146" width="128" height="44" rx="4" fill="#6c8fb8"/>
+<text x="214" y="174" text-anchor="middle" class="cell" style="fill:#ffffff">0.64</text>
+<rect x="280" y="146" width="128" height="44" rx="4" fill="#7898be"/>
+<text x="344" y="174" text-anchor="middle" class="cell" style="fill:#1f2328">0.58</text>
+<rect x="410" y="146" width="128" height="44" rx="4" fill="#92accb"/>
+<text x="474" y="174" text-anchor="middle" class="cell" style="fill:#1f2328">0.46</text>
+<rect x="540" y="146" width="128" height="44" rx="4" fill="#90aaca"/>
+<text x="604" y="174" text-anchor="middle" class="cell" style="fill:#1f2328">0.47</text>
+<rect x="670" y="146" width="128" height="44" rx="4" fill="#e5ebf4"/>
+<text x="734" y="174" text-anchor="middle" class="cell" style="fill:#1f2328">0.07</text>
+<rect x="800" y="146" width="128" height="44" rx="4" fill="#4e77a9"/>
+<text x="864" y="174" text-anchor="middle" class="cell" style="fill:#ffffff">0.78</text>
+<text x="132" y="220" text-anchor="end" class="label">signal_127</text>
+<rect x="150" y="192" width="128" height="44" rx="4" fill="#7999bf"/>
+<text x="214" y="220" text-anchor="middle" class="cell" style="fill:#1f2328">0.58</text>
+<rect x="280" y="192" width="128" height="44" rx="4" fill="#678ab6"/>
+<text x="344" y="220" text-anchor="middle" class="cell" style="fill:#ffffff">0.67</text>
+<rect x="410" y="192" width="128" height="44" rx="4" fill="#c3d1e3"/>
+<text x="474" y="220" text-anchor="middle" class="cell" style="fill:#1f2328">0.23</text>
+<rect x="540" y="192" width="128" height="44" rx="4" fill="#bacbdf"/>
+<text x="604" y="220" text-anchor="middle" class="cell" style="fill:#1f2328">0.27</text>
+<rect x="670" y="192" width="128" height="44" rx="4" fill="#d6e0ec"/>
+<text x="734" y="220" text-anchor="middle" class="cell" style="fill:#1f2328">0.14</text>
+<rect x="800" y="192" width="128" height="44" rx="4" fill="#4671a5"/>
+<text x="864" y="220" text-anchor="middle" class="cell" style="fill:#ffffff">0.82</text>
+<text x="132" y="266" text-anchor="end" class="label">signal_301</text>
+<rect x="150" y="238" width="128" height="44" rx="4" fill="#7192bb"/>
+<text x="214" y="266" text-anchor="middle" class="cell" style="fill:#1f2328">0.62</text>
+<rect x="280" y="238" width="128" height="44" rx="4" fill="#f4f7fb"/>
+<text x="344" y="266" text-anchor="middle" class="cell" style="fill:#1f2328">0.00</text>
+<rect x="410" y="238" width="128" height="44" rx="4" fill="#aec1d9"/>
+<text x="474" y="266" text-anchor="middle" class="cell" style="fill:#1f2328">0.33</text>
+<rect x="540" y="238" width="128" height="44" rx="4" fill="#205493"/>
+<text x="604" y="266" text-anchor="middle" class="cell" style="fill:#ffffff">1.00</text>
+<rect x="670" y="238" width="128" height="44" rx="4" fill="#eaeff6"/>
+<text x="734" y="266" text-anchor="middle" class="cell" style="fill:#1f2328">0.05</text>
+<rect x="800" y="238" width="128" height="44" rx="4" fill="#7e9cc1"/>
+<text x="864" y="266" text-anchor="middle" class="cell" style="fill:#1f2328">0.56</text>
+<text x="132" y="312" text-anchor="end" class="label">signal_365</text>
+<rect x="150" y="284" width="128" height="44" rx="4" fill="#c5d3e4"/>
+<text x="214" y="312" text-anchor="middle" class="cell" style="fill:#1f2328">0.22</text>
+<rect x="280" y="284" width="128" height="44" rx="4" fill="#f1f4f9"/>
+<text x="344" y="312" text-anchor="middle" class="cell" style="fill:#1f2328">0.02</text>
+<rect x="410" y="284" width="128" height="44" rx="4" fill="#819fc3"/>
+<text x="474" y="312" text-anchor="middle" class="cell" style="fill:#1f2328">0.54</text>
+<rect x="540" y="284" width="128" height="44" rx="4" fill="#205493"/>
+<text x="604" y="312" text-anchor="middle" class="cell" style="fill:#ffffff">1.00</text>
+<rect x="670" y="284" width="128" height="44" rx="4" fill="#e4ebf3"/>
+<text x="734" y="312" text-anchor="middle" class="cell" style="fill:#1f2328">0.08</text>
+<rect x="800" y="284" width="128" height="44" rx="4" fill="#5f85b2"/>
+<text x="864" y="312" text-anchor="middle" class="cell" style="fill:#ffffff">0.70</text>
+<text x="132" y="358" text-anchor="end" class="label">signal_577</text>
+<rect x="150" y="330" width="128" height="44" rx="4" fill="#b8c9de"/>
+<text x="214" y="358" text-anchor="middle" class="cell" style="fill:#1f2328">0.28</text>
+<rect x="280" y="330" width="128" height="44" rx="4" fill="#8ea8c9"/>
+<text x="344" y="358" text-anchor="middle" class="cell" style="fill:#1f2328">0.48</text>
+<rect x="410" y="330" width="128" height="44" rx="4" fill="#9ab2cf"/>
+<text x="474" y="358" text-anchor="middle" class="cell" style="fill:#1f2328">0.43</text>
+<rect x="540" y="330" width="128" height="44" rx="4" fill="#6488b4"/>
+<text x="604" y="358" text-anchor="middle" class="cell" style="fill:#ffffff">0.68</text>
+<rect x="670" y="330" width="128" height="44" rx="4" fill="#f2f6fa"/>
+<text x="734" y="358" text-anchor="middle" class="cell" style="fill:#1f2328">0.01</text>
+<rect x="800" y="330" width="128" height="44" rx="4" fill="#5c82b0"/>
+<text x="864" y="358" text-anchor="middle" class="cell" style="fill:#ffffff">0.72</text>
+<text x="132" y="404" text-anchor="end" class="label">signal_079</text>
+<rect x="150" y="376" width="128" height="44" rx="4" fill="#8aa6c7"/>
+<text x="214" y="404" text-anchor="middle" class="cell" style="fill:#1f2328">0.50</text>
+<rect x="280" y="376" width="128" height="44" rx="4" fill="#d3ddeb"/>
+<text x="344" y="404" text-anchor="middle" class="cell" style="fill:#1f2328">0.16</text>
+<rect x="410" y="376" width="128" height="44" rx="4" fill="#d3deeb"/>
+<text x="474" y="404" text-anchor="middle" class="cell" style="fill:#1f2328">0.15</text>
+<rect x="540" y="376" width="128" height="44" rx="4" fill="#cdd9e8"/>
+<text x="604" y="404" text-anchor="middle" class="cell" style="fill:#1f2328">0.18</text>
+<rect x="670" y="376" width="128" height="44" rx="4" fill="#7f9dc2"/>
+<text x="734" y="404" text-anchor="middle" class="cell" style="fill:#1f2328">0.55</text>
+<rect x="800" y="376" width="128" height="44" rx="4" fill="#416ea3"/>
+<text x="864" y="404" text-anchor="middle" class="cell" style="fill:#ffffff">0.84</text>
+<text x="132" y="450" text-anchor="end" class="label">signal_544</text>
+<rect x="150" y="422" width="128" height="44" rx="4" fill="#9db4d0"/>
+<text x="214" y="450" text-anchor="middle" class="cell" style="fill:#1f2328">0.41</text>
+<rect x="280" y="422" width="128" height="44" rx="4" fill="#f3f6fb"/>
+<text x="344" y="450" text-anchor="middle" class="cell" style="fill:#1f2328">0.00</text>
+<rect x="410" y="422" width="128" height="44" rx="4" fill="#38669f"/>
+<text x="474" y="450" text-anchor="middle" class="cell" style="fill:#ffffff">0.89</text>
+<rect x="540" y="422" width="128" height="44" rx="4" fill="#f4f7fb"/>
+<text x="604" y="450" text-anchor="middle" class="cell" style="fill:#1f2328">0.00</text>
+<rect x="670" y="422" width="128" height="44" rx="4" fill="#ccd8e7"/>
+<text x="734" y="450" text-anchor="middle" class="cell" style="fill:#1f2328">0.19</text>
+<rect x="800" y="422" width="128" height="44" rx="4" fill="#557dad"/>
+<text x="864" y="450" text-anchor="middle" class="cell" style="fill:#ffffff">0.75</text>
+<text x="132" y="496" text-anchor="end" class="label">signal_132</text>
+<rect x="150" y="468" width="128" height="44" rx="4" fill="#bfcee1"/>
+<text x="214" y="496" text-anchor="middle" class="cell" style="fill:#1f2328">0.25</text>
+<rect x="280" y="468" width="128" height="44" rx="4" fill="#a0b7d2"/>
+<text x="344" y="496" text-anchor="middle" class="cell" style="fill:#1f2328">0.39</text>
+<rect x="410" y="468" width="128" height="44" rx="4" fill="#ced9e8"/>
+<text x="474" y="496" text-anchor="middle" class="cell" style="fill:#1f2328">0.18</text>
+<rect x="540" y="468" width="128" height="44" rx="4" fill="#f4f7fb"/>
+<text x="604" y="496" text-anchor="middle" class="cell" style="fill:#1f2328">0.00</text>
+<rect x="670" y="468" width="128" height="44" rx="4" fill="#4c76a9"/>
+<text x="734" y="496" text-anchor="middle" class="cell" style="fill:#ffffff">0.79</text>
+<rect x="800" y="468" width="128" height="44" rx="4" fill="#6589b5"/>
+<text x="864" y="496" text-anchor="middle" class="cell" style="fill:#ffffff">0.67</text>
+<text x="132" y="542" text-anchor="end" class="label">signal_129</text>
+<rect x="150" y="514" width="128" height="44" rx="4" fill="#becde0"/>
+<text x="214" y="542" text-anchor="middle" class="cell" style="fill:#1f2328">0.26</text>
+<rect x="280" y="514" width="128" height="44" rx="4" fill="#e7edf5"/>
+<text x="344" y="542" text-anchor="middle" class="cell" style="fill:#1f2328">0.06</text>
+<rect x="410" y="514" width="128" height="44" rx="4" fill="#dde5f0"/>
+<text x="474" y="542" text-anchor="middle" class="cell" style="fill:#1f2328">0.11</text>
+<rect x="540" y="514" width="128" height="44" rx="4" fill="#f4f7fb"/>
+<text x="604" y="542" text-anchor="middle" class="cell" style="fill:#1f2328">0.00</text>
+<rect x="670" y="514" width="128" height="44" rx="4" fill="#205493"/>
+<text x="734" y="542" text-anchor="middle" class="cell" style="fill:#ffffff">1.00</text>
+<rect x="800" y="514" width="128" height="44" rx="4" fill="#436fa4"/>
+<text x="864" y="542" text-anchor="middle" class="cell" style="fill:#ffffff">0.84</text>
+</svg>
