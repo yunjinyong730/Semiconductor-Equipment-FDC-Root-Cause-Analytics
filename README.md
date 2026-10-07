@@ -39,6 +39,8 @@ Engineering Check Priority
 | 여러 센서의 변화 비교 | Root Cause Candidate Ranking |
 | 모델 성능 및 Edge 적용 | Engineer가 확인할 signal 우선순위 |
 
+기존 연구에서는 동일 실내 5개 위치에서 저비용 센서와 reference sensor를 함께 측정했고, 위치가 달라졌을 때, 시간이 길어졌을 때, 문과 창문 개폐 같은 환경 이벤트가 생겼을 때 보정 성능이 어떻게 달라지는지도 따로 봤습니다. 이번 프로젝트의 baseline, drift, distribution shift 분석은 그 과정에서 쓰던 관점을 반도체 장비 신호에 옮긴 것입니다.
+
 제가 기존 연구에서 계속 다뤄 온 핵심은 결국 센서 값 자체를 그대로 믿는 것이 아니라, 기준 상태와 비교해서 언제부터 달라졌고 어떤 변화가 중요한지를 판단하는 일이었습니다. 이 프로젝트는 그 경험을 반도체 공정 데이터에 적용해 본 것입니다.
 
 ## Dataset
