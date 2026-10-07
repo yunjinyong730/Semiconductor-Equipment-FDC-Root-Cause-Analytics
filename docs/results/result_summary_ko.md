@@ -13,12 +13,14 @@
 
 ## Top suspect signals
 
-| 순위 | Signal | RCA score |
-| ---: | --- | ---: |
-| 1 | `signal_059` | 0.5993 |
-| 2 | `signal_122` | 0.4716 |
-| 3 | `signal_127` | 0.4133 |
-| 4 | `signal_301` | 0.4051 |
-| 5 | `signal_365` | 0.3906 |
+| 순위 | Signal | RCA score | 근거 일치 수 |
+| ---: | --- | ---: | ---: |
+| 1 | `signal_059` | 0.5993 | 3/6 |
+| 2 | `signal_122` | 0.4716 | 3/6 |
+| 3 | `signal_127` | 0.4133 | 3/6 |
+| 4 | `signal_301` | 0.4051 | 3/6 |
+| 5 | `signal_365` | 0.3906 | 3/6 |
+
+`evidence_count`는 Effect Size, MI, Logistic Coefficient, Permutation Importance, PCA Residual, PCA Loading 중 정규화 값이 0.5 이상인 항목의 수입니다. 통계적인 확률값이 아니라 한 가지 importance에만 의존하지 않기 위한 교차 확인 지표입니다.
 
 > SECOM 변수는 익명화되어 있으므로 위 결과는 물리적 고장 원인이 아니라 우선 확인할 signal 후보입니다.
