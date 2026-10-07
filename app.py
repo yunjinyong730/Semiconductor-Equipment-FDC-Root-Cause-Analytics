@@ -9,9 +9,9 @@ import streamlit as st
 
 from src.fdc_analytics.pipeline import run_pipeline
 
-st.set_page_config(page_title="Semiconductor Equipment Health Analytics", layout="wide")
-st.title("Semiconductor Equipment Health Analytics")
-st.caption("FDC · Drift Detection · Yield Excursion Risk · Root-Cause Candidate Prioritization")
+st.set_page_config(page_title="반도체 장비 FDC & RCA", layout="wide")
+st.title("반도체 장비 FDC & Root Cause Analytics")
+st.caption("PCA 기반 FDC, Drift Detection, Yield Fail Risk, Root Cause Candidate 분석")
 
 OUT = Path("outputs")
 metrics_path = OUT / "metrics.json"
@@ -40,10 +40,10 @@ c2.metric("Monitoring signals", f"{metrics['selected_signals']}", f"from {metric
 c3.metric("FDC alarm rate", f"{metrics['fdc_alarm_rate']:.1%}")
 c4.metric("Test AP", f"{metrics['classifier']['average_precision']:.3f}")
 
-tabs = st.tabs(["Equipment Health", "FDC", "Drift", "Yield / RCA", "Synthetic PM", "Engineering Report"])
+tabs = st.tabs(["장비 상태", "FDC", "Drift", "Yield / RCA", "Synthetic PM", "분석 요약"])
 
 with tabs[0]:
-    st.subheader("Equipment health timeline")
+    st.subheader("장비 상태 Timeline")
     st.line_chart(timeline.set_index("timestamp")[["fdc_score", "drift_score", "fail_risk"]])
     st.dataframe(timeline[["timestamp", "health_state", "fdc_alarm", "drift_warning", "fail_risk", "is_fail"]].tail(30), use_container_width=True)
 
@@ -67,10 +67,17 @@ with tabs[2]:
     st.caption("Drift is computed from rolling mean/variance changes of high-loading monitoring signals relative to the Pass baseline.")
 
 with tabs[3]:
-    st.subheader("Yield excursion risk and suspect-signal ranking")
+    st.subheader("Yield Fail Risk와 RCA 후보")
     st.line_chart(timeline.set_index("timestamp")[["fail_risk"]])
-    st.dataframe(rca[["rank", "signal", "rca_score", "effect_size", "mutual_information", "logistic_abs_coef", "fail_residual_contribution"]], use_container_width=True)
-    st.warning("SECOM variables are anonymized. The ranking identifies signals to inspect first; it does not prove a physical root cause.")
+    rca_cols = [
+        "rank", "signal", "rca_score", "evidence_count", "evidence_agreement",
+        "effect_size", "mutual_information", "logistic_abs_coef", "fail_residual_contribution"
+    ]
+    rca_cols = [col for col in rca_cols if col in rca.columns]
+    st.dataframe(rca[rca_cols], use_container_width=True)
+    st.warning("SECOM 변수는 익명화되어 있습니다. RCA 결과는 실제 고장 원인의 확정값이 아니라 먼저 확인할 signal 후보입니다.")
+    if "evidence_count" in rca.columns:
+        st.caption("evidence_count는 서로 다른 6개 RCA 근거 중 정규화 값이 0.5 이상인 항목 수입니다. 확률값이 아니라 교차 확인용 지표입니다.")
     st.subheader("Data-quality disposition")
     st.dataframe(quality["status"].value_counts().rename_axis("status").to_frame("count"), use_container_width=True)
 
@@ -79,9 +86,9 @@ with tabs[4]:
     st.line_chart(timeline.set_index("timestamp")[["synthetic_pm_score"]])
     pm_rows = timeline[timeline["synthetic_pm_event"]]
     if not pm_rows.empty:
-        st.write(f"Synthetic PM point: **{pm_rows.iloc[0]['timestamp']}**")
+        st.write(f"Synthetic PM 시점: {pm_rows.iloc[0]['timestamp']}")
     st.info("Temporary offset/variance changes are injected only to validate the analytical workflow. This is not a recorded SECOM PM event.")
 
 with tabs[5]:
     st.markdown(report)
-    st.download_button("Download one-page report", report, file_name="engineering_report.md")
+    st.download_button("분석 요약 다운로드", report, file_name="engineering_report.md")
