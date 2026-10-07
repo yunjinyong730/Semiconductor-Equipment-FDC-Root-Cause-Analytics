@@ -12,11 +12,7 @@ UCI_LEGACY_BASE = "https://archive.ics.uci.edu/ml/machine-learning-databases/sec
 
 
 def download_secom(data_dir: str | Path, force: bool = False) -> tuple[Path, Path]:
-    """Download and extract the UCI SECOM dataset.
-
-    The raw dataset is intentionally not committed. UCI distributes SECOM under
-    CC BY 4.0; this function keeps attribution and provenance explicit.
-    """
+    """UCI SECOM 데이터를 내려받아 data_dir에 저장합니다."""
     data_dir = Path(data_dir)
     data_dir.mkdir(parents=True, exist_ok=True)
     data_path = data_dir / "secom.data"
@@ -52,8 +48,9 @@ def download_secom(data_dir: str | Path, force: bool = False) -> tuple[Path, Pat
     if not data_path.exists() or not labels_path.exists():
         detail = f" Zip download error: {zip_error}" if zip_error else ""
         raise FileNotFoundError(
-            "Could not retrieve SECOM from UCI. Download secom.data and "
-            "secom_labels.data manually into data/raw/ and rerun." + detail
+            "SECOM 데이터를 내려받지 못했습니다. "
+            "secom.data와 secom_labels.data를 data/raw/에 넣고 다시 실행하세요."
+            + detail
         )
     return data_path, labels_path
 
@@ -73,7 +70,7 @@ def load_secom(data_dir: str | Path, auto_download: bool = True) -> tuple[pd.Dat
     timestamp_text = labels.iloc[:, 1:].fillna("").agg(" ".join, axis=1).str.strip()
     timestamp = pd.to_datetime(timestamp_text, dayfirst=True, errors="coerce")
     if timestamp.isna().any():
-        raise ValueError("Could not parse one or more SECOM timestamps.")
+        raise ValueError("SECOM timestamp를 읽지 못했습니다.")
 
     order = timestamp.sort_values().index
     return X.loc[order].reset_index(drop=True), y.loc[order].reset_index(drop=True), timestamp.loc[order].reset_index(drop=True)
