@@ -42,6 +42,7 @@ jobs:
           if git diff --cached --quiet; then
             echo "No generated result changes"
           else
-            git commit -m "Add SECOM analysis result figures"
+            git commit -m "Update SECOM analysis result figures"
+            git pull --rebase origin main
             git push
           fi
